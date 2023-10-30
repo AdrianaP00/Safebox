@@ -1,7 +1,7 @@
-const express = require('express');
-const usersRouter = express.Router();
-const { isAuth, isAdmin } = require("../../middlewares/auth")
-const {getUsers,register,login, userProfile ,getOneUser,postUser,putUser, deleteUser} = require("../controllers/userCtrl")
+const express = require("express");
+const safeBoxRouter = express.Router();
+const { isAuth } = require("../../middlewares/auth");
+const { getOneSafeBox,postSafeBox,putSafeBox } = require("../controllers/safeBoxCtrl");
 
 /**
  * @swagger
@@ -63,7 +63,7 @@ const {getUsers,register,login, userProfile ,getOneUser,postUser,putUser, delete
  *         - user
  *         - token
  *       example:
- *         user: 
+ *         user:
  *           name: Jose
  *           email: Jose@diseñador.com
  *           password: Jose123
@@ -71,19 +71,11 @@ const {getUsers,register,login, userProfile ,getOneUser,postUser,putUser, delete
  *         token: Jose123
  */
 
-usersRouter.get('/', [isAuth],getUsers);
 
-usersRouter.get('/:id',[isAuth], getOneUser);
+safeBoxRouter.get("/{id}/items", [isAuth], getOneSafeBox);
 
-usersRouter.post("/newuser", postUser);
+safeBoxRouter.put("/{id}/items", [isAuth], putSafeBox);
 
-usersRouter.put("/modifyuser/:id",[isAdmin], putUser);
+safeBoxRouter.post("/safebox", postSafeBox);
 
-usersRouter.post("/register", register);
-
-usersRouter.delete("/:id",[isAdmin] ,deleteUser);
-
-usersRouter.post("/login", login);
-usersRouter.post('/profile', [isAuth], userProfile);
-
-module.exports = usersRouter;
+module.exports = safeBoxRouter;
