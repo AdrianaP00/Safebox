@@ -1,16 +1,15 @@
-const { randomUUID } = require("crypto");
-
 const itemSchema = new Schema(
   {
-    UUID: { type: randomUUID, requires: true },
     items: [{ type: String, require: true, trim: true }],
-    safeBox: [{ type: Schema.Types.ObjectId, required: false, ref: "safeBox" }],
+    id_safeBox: [
+      { type: Schema.Types.ObjectId, required: false, ref: "safeBox" },
+    ],
   },
   {
     collection: "item",
     toJSON: {
       transform: (doc, ret) => {
-        delete ret.safeBox;
+        delete ret.id_safeBox;
         delete ret.__v;
         return ret;
       },
