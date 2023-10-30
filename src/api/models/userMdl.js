@@ -11,10 +11,12 @@ const userSchema = new Schema(
     password: { type: String, required: true, trim: true },
     phoneNumber: { type: String, required: false },
     address: { type: String, required: false },
-    role: { type: String, enum: ["OWNER","HOST"] },
-    confirmed: { type: Boolean, default: false }
+    role: { type: String, enum: ["isAuth, isAdmin"] },
+    confirmed: { type: Boolean, default: false },
+    items: [{ type: Schema.ObjectId, required: true , ref: "items" }]
   },
 );
 
-const user = mongoose.model("user", userSchema);
-module.exports = user;
+const User = mongoose.model("user", userSchema);
+module.exports = User;
+
