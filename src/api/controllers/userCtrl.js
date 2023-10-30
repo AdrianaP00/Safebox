@@ -1,5 +1,6 @@
 const User = require("../models/userMdl")
 const bcrypt = require("bcrypt");
+const email = require ("../../utils/mailer.config")
 
 const {generateSign} = require("../../utils/jwt")
 const {validateEmail,validatePassword,usedEmail} = require("../../utils/validators")
